@@ -1,11 +1,11 @@
 import './App.css';
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import Card from './components/Card';
 import Footer from './components/Footer';
 
 function App() {
   let numberOfCards = 16;
-  let numberOfColors = 256 * 256 * 256;
+  // let numberOfColors = 256 * 256 * 256;
 
   function randomize(num) {
     const set = new Set();
@@ -16,42 +16,55 @@ function App() {
   }
 
   const [cards, setCards] = useState(randomize(numberOfCards));
-  // const [score, setScore] = useState(0);
+  const [hiScore, setHiScore] = useState(0);
   const [clickedCards, setClickedCards] = useState([]);
+
   // ^ Option 1, does not work, colors get regenerate after each click
   // const colors = randomize(numberOfColors);
   // ^ Option 2, works, but setColors is never used
   // const [colors, setColors] = useState(randomize(numberOfColors));
   // ^ Option 3, does not work, ESLint suggested using useRef
-  // let colors; 
+  // let colors;
   // useEffect(() => {
   //   colors = randomize(numberOfColors);
   //   console.log("🚀 ~ file: App.js:26 ~ useEffect ~ colors:", colors)
   // }, [])
   // ^ Option 4, works. Value is in colors.current.
   // const colors = useRef(randomize(numberOfColors))
-  
+
   function handleClick(e) {
     const index = e.target.dataset.index;
     if (clickedCards.includes(index)) {
       alert('Game over!');
+      setClickedCards([]);
     } else {
       const tempArray = [...clickedCards, index];
-      console.log("🚀 ~ file: App.js:28 ~ handleClick ~ tempArray:", tempArray)
       setClickedCards(tempArray);
+      if (tempArray.length > hiScore) {
+        setHiScore(tempArray.length);
+      }
+      if (tempArray.length === numberOfCards) {
+        alert('You win!')
+        setClickedCards([]);
+      }
       setCards(randomize(numberOfCards));
     }
   }
 
   return (
-    <div className='all'>
-      <div className='container'>
-        <div className='sidebar'>
+    <div className="all">
+      <div className="container">
+        <div className="sidebar">
           <h1>Memory Game</h1>
           <h3>Remember the cards you click on!</h3>
           <div className="scores-container">
-            <div>{'Score: '} {clickedCards.length}</div>
-            <div>{'High score: '}</div>
+            <div>
+              {'Score: '} {clickedCards.length}
+            </div>
+            <div>
+              {'High score: '}{' '}
+              {hiScore}
+            </div>
           </div>
         </div>
         <main>
@@ -69,7 +82,7 @@ function App() {
           </div>
         </main>
       </div>
-        <Footer />
+      <Footer />
     </div>
   );
 }

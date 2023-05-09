@@ -1,0 +1,9 @@
+.copyright {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.github {
+  color: white;
+}

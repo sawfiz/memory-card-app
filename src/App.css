@@ -1,16 +1,61 @@
-.App {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* border: 1px red solid; */
+}
+
+body {
+  height: 100vh;
+  background-color: lightblue;
+}
+
+.all {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 200px auto;
+  margin: 2rem;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #ad2d2b;
+  color: white;
+  border-radius: 5px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+h1 {
+  margin: 1rem;
   text-align: center;
+  font-weight: bold;
+}
+
+h3 {
+  text-align: center;
+  margin: 0.5rem;
+}
+
+.scores-container {
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: left;
 }
 
 main {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.scores-container {
-  display: flex;
-  justify-content: space-evenly;
 }
 
 .game-board {
@@ -20,8 +65,17 @@ main {
 }
 
 .card {
-  width: 18vh;
-  height: 18vh;
+  width: 20vh;
+  height: 20vh;
   border: 1px blue solid;
   cursor: pointer;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+  border-radius: 5px;
+}
+
+.footer {
+  grid-area: footer;
+  color: white;
+  background-color: #333;
+  font-size: 0.8rem;
 }

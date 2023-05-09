@@ -44,27 +44,32 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <h1>Memory Game</h1>
-      <div className="scores-container">
-        <h2>{'Score: '} {clickedCards.length}</h2>
-        <h2>{'High score: '}</h2>
-      </div>
-      <main>
-        <div className="game-board">
-          {cards.map((card, index) => {
-            return (
-              <Card
-                key={index}
-                order={card}
-                // colors={colors.current}
-                handleClick={handleClick}
-              />
-            );
-          })}
+    <div className='all'>
+      <div className='container'>
+        <div className='sidebar'>
+          <h1>Memory Game</h1>
+          <h3>Remember the cards you click on!</h3>
+          <div className="scores-container">
+            <div>{'Score: '} {clickedCards.length}</div>
+            <div>{'High score: '}</div>
+          </div>
         </div>
-      </main>
-      <Footer />
+        <main>
+          <div className="game-board">
+            {cards.map((card, index) => {
+              return (
+                <Card
+                  key={index}
+                  order={card}
+                  // colors={colors.current}
+                  handleClick={handleClick}
+                />
+              );
+            })}
+          </div>
+        </main>
+      </div>
+        <Footer />
     </div>
   );
 }

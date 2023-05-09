@@ -8,6 +8,11 @@ main {
   align-items: center;
 }
 
+.scores-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 .game-board {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

@@ -1,6 +1,7 @@
 import './App.css';
 import { useState, useEffect, useRef } from 'react';
 import Card from './components/Card';
+import Footer from './components/Footer';
 
 function App() {
   let numberOfCards = 16;
@@ -15,18 +16,20 @@ function App() {
   }
 
   const [cards, setCards] = useState(randomize(numberOfCards));
-  const [score, setScore] = useState(0);
+  // const [score, setScore] = useState(0);
   const [clickedCards, setClickedCards] = useState([]);
-  // const [colors, setColors] = useState(randomize(numberOfColors));
+  // ^ Option 1, does not work, colors get regenerate after each click
   // const colors = randomize(numberOfColors);
-  
+  // ^ Option 2, works, but setColors is never used
+  // const [colors, setColors] = useState(randomize(numberOfColors));
+  // ^ Option 3, does not work, ESLint suggested using useRef
   // let colors; 
   // useEffect(() => {
   //   colors = randomize(numberOfColors);
   //   console.log("🚀 ~ file: App.js:26 ~ useEffect ~ colors:", colors)
   // }, [])
-
-  const colors = useRef(randomize(numberOfColors))
+  // ^ Option 4, works. Value is in colors.current.
+  // const colors = useRef(randomize(numberOfColors))
   
   function handleClick(e) {
     const index = e.target.dataset.index;
@@ -42,7 +45,11 @@ function App() {
 
   return (
     <div className="App">
-      <header>Memory Game</header>
+      <h1>Memory Game</h1>
+      <div className="scores-container">
+        <h2>{'Score: '} {clickedCards.length}</h2>
+        <h2>{'High score: '}</h2>
+      </div>
       <main>
         <div className="game-board">
           {cards.map((card, index) => {
@@ -50,13 +57,14 @@ function App() {
               <Card
                 key={index}
                 order={card}
-                colors={colors.current}
+                // colors={colors.current}
                 handleClick={handleClick}
               />
             );
           })}
         </div>
       </main>
+      <Footer />
     </div>
   );
 }

@@ -44,7 +44,7 @@ function App() {
         setHiScore(tempArray.length);
       }
       if (tempArray.length === numberOfCards) {
-        alert('You win!')
+        alert('You win!');
         setClickedCards([]);
       }
       setCards(randomize(numberOfCards));
@@ -56,17 +56,18 @@ function App() {
       <div className="container">
         <div className="sidebar">
           <h1>Memory Game</h1>
-          <h3>Remember the cards you click on!</h3>
+          <h3>
+            Remember the cards you click on, and do not click on any card twice!
+          </h3>
           <div className="scores-container">
             <div>
               {'Score: '} {clickedCards.length}
             </div>
             <div>
-              {'High score: '}{' '}
-              {hiScore}
+              {'High score: '} {hiScore}
             </div>
           </div>
-          <div className='credit'>Images from 123rf.com</div>
+          <div className="credit">Images from 123rf.com</div>
         </div>
         <main>
           <div className="game-board">

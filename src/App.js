@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Card from './components/Card';
 
 function App() {
@@ -16,17 +16,26 @@ function App() {
 
   const [cards, setCards] = useState(randomize(numberOfCards));
   const [score, setScore] = useState(0);
-  const [clickedCards, setClickedCards] = useState([])
-  const [colors, setColors] = useState(randomize(numberOfColors))
+  const [clickedCards, setClickedCards] = useState([]);
+  // const [colors, setColors] = useState(randomize(numberOfColors));
+  // const colors = randomize(numberOfColors);
+  
+  // let colors; 
+  // useEffect(() => {
+  //   colors = randomize(numberOfColors);
+  //   console.log("🚀 ~ file: App.js:26 ~ useEffect ~ colors:", colors)
+  // }, [])
 
+  const colors = useRef(randomize(numberOfColors))
+  
   function handleClick(e) {
-    console.log(e.target.dataset.index);
-    if (clickedCards.includes(e.target.dataset.index)) {
+    const index = e.target.dataset.index;
+    if (clickedCards.includes(index)) {
       alert('Game over!');
     } else {
-      const newSet = [...clickedCards, e.target.dataset.index];
-      setClickedCards(newSet)
-      console.log("🚀 ~ file: App.js:29 ~ handleClick ~ clickedCards:", newSet)
+      const tempArray = [...clickedCards, index];
+      console.log("🚀 ~ file: App.js:28 ~ handleClick ~ tempArray:", tempArray)
+      setClickedCards(tempArray);
       setCards(randomize(numberOfCards));
     }
   }
@@ -41,7 +50,7 @@ function App() {
               <Card
                 key={index}
                 order={card}
-                colors={colors}
+                colors={colors.current}
                 handleClick={handleClick}
               />
             );

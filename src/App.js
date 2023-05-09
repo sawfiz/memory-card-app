@@ -66,6 +66,7 @@ function App() {
               {hiScore}
             </div>
           </div>
+          <div className='credit'>Images from 123rf.com</div>
         </div>
         <main>
           <div className="game-board">

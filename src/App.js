@@ -2,6 +2,7 @@ import './App.css';
 import { useState } from 'react';
 import Card from './components/Card';
 import Footer from './components/Footer';
+import Modal from './components/Modal';
 
 function App() {
   let numberOfCards = 16;
@@ -18,6 +19,7 @@ function App() {
   const [cards, setCards] = useState(randomize(numberOfCards));
   const [hiScore, setHiScore] = useState(0);
   const [clickedCards, setClickedCards] = useState([]);
+  const [gameOver, setGameOver] = useState({ status: false, message: '' });
 
   // ^ Option 1, does not work, colors get regenerate after each click
   // const colors = randomize(numberOfColors);
@@ -35,8 +37,7 @@ function App() {
   function handleClick(e) {
     const index = e.target.dataset.index;
     if (clickedCards.includes(index)) {
-      alert('Game over!');
-      setClickedCards([]);
+      setGameOver({ status: true, message: 'You lose!' });
     } else {
       const tempArray = [...clickedCards, index];
       setClickedCards(tempArray);
@@ -44,11 +45,15 @@ function App() {
         setHiScore(tempArray.length);
       }
       if (tempArray.length === numberOfCards) {
-        alert('You win!');
-        setClickedCards([]);
+        setGameOver({ status: true, message: 'You win!' });
       }
       setCards(randomize(numberOfCards));
     }
+  }
+
+  function restartGame() {
+    setClickedCards([]);
+    setGameOver({ status: false, message: '' });
   }
 
   return (
@@ -85,6 +90,7 @@ function App() {
         </main>
       </div>
       <Footer />
+      <Modal gameOver={gameOver} restartGame={restartGame} />
     </div>
   );
 }

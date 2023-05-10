@@ -1,8 +1,8 @@
 # Readme
 
 This is an assignment from React, Javascript Course, the Odin Project.
-[Project Description](https://www.theodinproject.com/lessons/node-path-javascript-memory-card)
-[Live site](https://sawfiz.github.io/memory-card-app/)
+- [Project Description](https://www.theodinproject.com/lessons/node-path-javascript-memory-card)
+- [Live site](https://sawfiz.github.io/memory-card-app/)
 
 ## What I learned
 - Use `useRef` to store variables that does not change over rerenders
